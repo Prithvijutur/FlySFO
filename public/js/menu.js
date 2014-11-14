@@ -3,6 +3,14 @@
 'use strict';
 
 var React = require('react');
+var menuActions = require('./actions/menuActions');
+var sfoStore = require('./stores/sfostore');
+
+function  getMenuState() {
+  return {
+    populateWithData: sfoStore.getData()
+  };
+}
 
 var MenuExample = React.createClass({displayName: 'MenuExample',
 
@@ -10,15 +18,23 @@ var MenuExample = React.createClass({displayName: 'MenuExample',
         return { focused: 0 };
     },
 
+    componentDidMount: function() {
+        sfoStore.addChangeListener(this._onChange);
+    },
+
+    componentWillUnmount: function() {
+        sfoStore.removeChangeListener(this._onChange);
+    },
+
     clicked: function(index){
 
         // The click handler will update the state with
         // the index of the focused menu entry
-
+        menuActions.select(index);
         this.setState({focused: index});
     },
 
-    render: function() {
+    render: function() {    
 
         // Here we will read the items property, which was passed
         // as an attribute when the component was created
@@ -47,16 +63,21 @@ var MenuExample = React.createClass({displayName: 'MenuExample',
                         
                 ), 
                 
-                React.DOM.p(null, "Selected: ", this.props.items[this.state.focused])
+                React.DOM.p(null, "Selected: ", this.state.populateWithData)
             )
         );
 
+    },
+
+    _onChange: function() {
+      console.log('getting state back as ' , getMenuState());
+      this.setState(getMenuState());
     }
 });
 
 // Render the menu component on the page, and pass an array with menu options
 
 React.renderComponent(
-    MenuExample({items:  ['Home', 'Services', 'About', 'Contact us'] }),
+    MenuExample({items:  ['Airlines', 'Dining', 'Shopping', 'Things To Do', 'About'] }),
     document.body
 );
