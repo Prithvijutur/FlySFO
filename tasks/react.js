@@ -8,7 +8,8 @@ module.exports = function react(grunt) {
 	return {
 		single_file_output: {
 			files: {
-				'public/js/app.js': 'public/js/app.jsx'
+				'public/js/app.js': 'public/js/app.jsx',
+				'public/js/menu.js': 'public/js/menu.jsx'
 			}
 		}
 	};

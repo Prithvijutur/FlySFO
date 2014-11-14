@@ -9,6 +9,7 @@ module.exports = function browserify(grunt) {
 		build: {
 			files: {
 				'.build/js/app.js': ['public/js/app.js'],
+				'.build/js/menu.js': ['public/js/menu.js'],
 			},
 			options: {}
 		}
