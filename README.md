@@ -1,4 +1,4 @@
-# react-dust-exploration
+# react-exploration
 
 ## steps to install
 

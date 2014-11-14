@@ -3,6 +3,7 @@ var AppDispatcher = require('../dispatchers/menuDispatcher');
 var EventEmitter = require('events').EventEmitter;
 var SFOConstants = require('../constants/sfoconstants');
 var assign = require('object-assign');
+var sfoFetcher = require('../../../fetchers/SFOFetcher');
 
 var CHANGE_EVENT = 'change';
 
@@ -34,6 +35,7 @@ var sfoStore = assign({}, EventEmitter.prototype, {
    * @return {object}
    */
   getData: function() {
+    sfoFetcher.read(function() {console.log('done getting data');});
     return {'prithvi': 'prithvi'};
   },
 
